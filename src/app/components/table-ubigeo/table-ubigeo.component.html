@@ -1,0 +1,33 @@
+<h3>{{title}}</h3>
+<table class="table table-striped">
+   <thead>
+      <tr>
+         <th scope="col">Código</th>
+         <th scope="col">Nombre</th>
+         <th scope="col">Código Padre</th>
+         <th scope="col">Descripción Padre</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr *ngFor="let item of dataStore; index as i">
+         <td>
+            {{item.code}}
+         </td>
+         <td>
+            {{item.name}}
+         </td>
+         <td>
+            {{item.code_father}}
+         </td>
+         <td>
+            {{item.name_father}}
+         </td>
+      </tr>
+
+      <tr *ngIf="error">
+         <td colspan="4" class="text-center">
+            Ha ocurrido un error
+         </td>
+      </tr>
+   </tbody>
+</table>
