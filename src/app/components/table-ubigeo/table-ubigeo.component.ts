@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CaseUbigeoService } from 'src/app/business/uses-case/case-ubigeo.service';
-import { UbigeoTableModel } from 'src/app/model/ubigeo-table.model';
+import { UbigeoTableModel } from 'src/app/business/model/ubigeo-table.model';
+
 
 @Component({
    selector: 'app-table-ubigeo',

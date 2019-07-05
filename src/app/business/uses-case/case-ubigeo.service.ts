@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, observable } from 'rxjs';
 import { RequestService } from 'src/app/services/request.service';
-import { UbigeoModel } from 'src/app/model/ubigeo.model';
-import { UbigeoTableModel } from 'src/app/model/ubigeo-table.model';
+import { UbigeoTableModel } from 'src/app/business/model/ubigeo-table.model';
+import { UbigeoModel } from '../model/ubigeo.model';
+// import { UbigeoModel } from '../model/ubigeo.model';
 
 @Injectable()
 export class CaseUbigeoService {

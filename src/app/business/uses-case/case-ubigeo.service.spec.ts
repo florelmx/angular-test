@@ -4,8 +4,9 @@ import { CaseUbigeoService } from './case-ubigeo.service';
 import { RequestService } from 'src/app/services/request.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { throwError, of } from 'rxjs';
-import { UbigeoModel } from 'src/app/model/ubigeo.model';
-import { UbigeoTableModel } from 'src/app/model/ubigeo-table.model';
+
+import { UbigeoTableModel } from 'src/app/business/model/ubigeo-table.model';
+import { UbigeoModel } from '../model/ubigeo.model';
 
 describe('CaseUbigeoService', () => {
 
