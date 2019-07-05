@@ -12,7 +12,7 @@ export class CaseUbigeoService {
       public requestService: RequestService
    ) { }
 
-   // servicio para optener la lista de ubigeo desde una data local txt
+   // servicio para optener la lista de ubigeo desde una data local txt y regresa un array de obj tipo UbigeoModel
    getDataLocal(): Observable<UbigeoModel[]> {
       return new Observable(observable => {
          this.requestService.getLocally('assets/mocks/ubigeo.txt', 'text').subscribe(
@@ -37,10 +37,10 @@ export class CaseUbigeoService {
                         let code = <any>parseInt(obj)
 
                         if (!isNaN(code)) {
-                           code = (code < 10 ? '0' + code : code)
+                           code = (code < 10 ? '0' + code : code)//para matener el formato de dos digitos en el codigo
                            var name = obj.replace(code, '').trim()
-                           switch (aux) {
-                              case 0:
+                           switch (aux) { // verifica las veces recorrida para identificar atributo que se definira
+                              case 0: 
                                  ubigeo.department.code = code;
                                  ubigeo.department.name = name;
                                  break;
@@ -71,26 +71,26 @@ export class CaseUbigeoService {
       })
    }
 
-   // servicio para optener la lista de ubigeo desde una data local txt
-   getDataConditional(key = 'department'): Observable<UbigeoTableModel[]> {
+   // servicio para optener una estructura padre e hijo
+   getDataConditional(key = 'department'): Observable<UbigeoTableModel[]> { //key define cual es el atributo hijo el cual encabeza la estructura
       return new Observable(observable => {
-         this.getDataLocal().subscribe(
+         this.getDataLocal().subscribe( // metodo que regresa un array de obj tipo ubigeoModel
             res => {
                if (key) {
                   let data = <any>res
-                  // Recorrer la data para darle estrucutura UbigeoModel
+                  
                   let ubgeos = []
                   data.forEach(element => {
-                     if (element[key].code != '-') {
-                        let keys = Object.keys(element)
-                        var d = ubgeos.find(d => d.code == element[key].code)
-                        if (!d) {
-                           let i = keys.indexOf(key)
-                           let ubigeo = new UbigeoTableModel()
-                           ubigeo.initData()
-                           ubigeo.code = element[key].code;
-                           ubigeo.name = element[key].name;
-                           if (i > 0) {
+                     if (element[key].code != '-') { // verificamos que el codigo no sea - la cual seria que este valor no ha sido asignado
+                        let keys = Object.keys(element) // optener todos los keys principales del obj
+                        var d = ubgeos.find(d => d.code == element[key].code) // optener el obj que coincida con el code hijo
+                        if (!d) { 
+                           let i = keys.indexOf(key) // optener  index al cual pertenece el key en el obj Keys
+                           let ubigeo = new UbigeoTableModel() 
+                           ubigeo.initData() // inicializa el obj
+                           ubigeo.code = element[key].code; // asignar los valores de los atributos hijos
+                           ubigeo.name = element[key].name; // asignar los valores de los atributos hijos
+                           if (i > 0) { // virifica si es index optenido del key es el primero, en caso de no ser identifica el padre que seria keys[i - 1]
                               ubigeo.code_father = element[keys[i - 1]].code
                               ubigeo.name_father = element[keys[i - 1]].name
                            }
